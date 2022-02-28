@@ -2,43 +2,40 @@ import styled from "styled-components";
 import { Routes, Route, Link } from "react-router-dom";
 
 import { RiShoppingCartLine } from "react-icons/ri";
-import { AiOutlineHome } from "react-icons/ai";
-import { GiShoppingCart } from "react-icons/gi";
+import { RiHomeHeartFill } from "react-icons/ri";
+import { ImCart } from "react-icons/im";
 import Products from "./Products";
 import Cart from "./Cart";
 
 const Wrapper = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=League+Gothic:wdth@75&display=swap");
   display: grid;
   justify-content: center;
-  margin: 40px;
+  width: 100%;
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
 `;
 
 const TitleWrapper = styled.div`
-  * {
-    margin: 0;
-  }
   display: flex;
   align-items: center;
-  column-gap: 1rem;
-  font-family: "Kaushan Script", cursive;
-  align-self: flex-start;
+  font-family: "League Gothic", sans-serif;
+  font-size: 1.5rem;
 `;
 
 const Icons = styled.div`
-  font-size: 2rem;
-
-  :hover {
-    font-size: 3rem;
-    cursor: pointer;
-  }
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
 `;
 
 const LinksWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 2rem;
+  align-items: center;
 
   a {
     text-decoration: none;
@@ -49,26 +46,25 @@ const LinksWrapper = styled.div`
 export default function App() {
   return (
     <Wrapper className="App">
-      <TitleWrapper>
-        <Icons>
+      <Header>
+        <TitleWrapper>
           <RiShoppingCartLine />
-        </Icons>
-        <h1>Go Cart</h1>
-      </TitleWrapper>
-      <LinksWrapper>
-        <Link to="/">
-          <Icons>
-            <AiOutlineHome />
-          </Icons>
-        </Link>
+          Go Shopping
+        </TitleWrapper>
+        <LinksWrapper>
+          <Link to="/">
+            <Icons>
+              <RiHomeHeartFill />
+            </Icons>
+          </Link>
 
-        <Link to="/cart">
-          <Icons>
-            <GiShoppingCart />
-          </Icons>
-        </Link>
-      </LinksWrapper>
-
+          <Link to="/cart">
+            <Icons>
+              <ImCart />
+            </Icons>
+          </Link>
+        </LinksWrapper>
+      </Header>
       <Routes>
         <Route path="/" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
