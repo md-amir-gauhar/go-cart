@@ -1,5 +1,8 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IoIosCart } from "react-icons/io";
+import { AiFillStop } from "react-icons/ai";
+import useShop from "./CartContext";
 
 const Wrapper = styled.div`
   display: grid;
@@ -25,7 +28,7 @@ const Cart = styled.div`
   right: 20px;
   width: 20px;
   height: 20px;
-  background: #60c95d;
+  background-color: ${(props) => (props.inCart ? "red" : "#60c95d")};
   color: #fff;
   border-radius: 50%;
   padding: 5px;
@@ -64,10 +67,32 @@ const Subtitle = styled.p`
 `;
 
 const ProductCard = ({ name, imageUrl, price }) => {
+  const { products, addToCart, removeFromCart } = useShop();
+  const [inCart, setInCart] = useState(false);
+
+  useEffect(() => {
+    const productIsInCart = products.find((product) => product.name === name);
+    if (productIsInCart) {
+      setInCart(true);
+    } else {
+      setInCart(false);
+    }
+  }, [products, name]);
+
+  const clickHandler = () => {
+    const product = { name, imageUrl, price };
+
+    if (inCart) {
+      removeFromCart(product);
+    } else {
+      addToCart(product);
+    }
+  };
+  console.log(inCart);
   return (
     <Wrapper background={imageUrl}>
-      <Cart>
-        <IoIosCart />
+      <Cart onClick={clickHandler} inCart={inCart}>
+        {inCart ? <AiFillStop /> : <IoIosCart />}
       </Cart>
       <TextContainer>
         <Title>{name}</Title>

@@ -13,6 +13,7 @@ const ProductsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, auto);
   gap: 20px;
+  flex-wrap: wrap;
 `;
 
 const Products = () => {
